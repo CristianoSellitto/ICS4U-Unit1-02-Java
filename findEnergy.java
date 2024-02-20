@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
 * This is the program.
 */
-final class checkLogLength {
+final class findEnergy {
     /**
     * Prevent instantiation.
     * Throw an exception IllegalStateException.
@@ -20,7 +20,7 @@ final class checkLogLength {
     * @throws IllegalStateException if this is ever called
     *
     */
-    private checkLogLength() {
+    private findEnergy() {
         throw new IllegalStateException("Cannot be instantiated");
     }
 
@@ -30,14 +30,37 @@ final class checkLogLength {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
+        // Get input
         final Scanner input = new Scanner(System.in);
-        System.out.print("Enter log length (m): ");
+        System.out.print("Enter mass (kg): ");
 
-        static final float length = Float.parseFloat(input.nextLine());
-        static final float maxLogsCarried = 1100 / (20 * length);
+        // Check if input is valid
+        try {
+            final double mass = Float.parseFloat(input.nextLine());
+            if (mass < 0) {
+                // Input is invalid
+                Integer.parseInt(null);
+            } else {
+                // Calculate energy
+                final double energyReleased = mass * Math.pow(
+                    2.998 * Math.pow(10, 8), 2
+                );
 
-        System.out.println("A truck can carry " + maxLogsCarried + " " + length + " meter long logs.");
+                // Print output
+                System.out.println(
+                    "A " + mass + "kg object would produce "
+                    + energyReleased + " J of energy."
+                );
+            }
+        } catch (NumberFormatException e) {
+            // Input is invalid
+            System.out.println("Invalid input.");
+        }
 
+        // Close scanner
+        input.close();
+
+        // Show the program as done
         System.out.println("\nDone.");
     }
 }
